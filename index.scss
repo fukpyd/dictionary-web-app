@@ -1,0 +1,144 @@
+@import "partials/colors";
+@import "partials/variables";
+@import "partials/themes";
+@import "partials/mixins";
+
+:root.light {
+  @include theme-colors($theme-map-light);
+}
+
+:root:not(.light) {
+  @include theme-colors($theme-map-dark);
+}
+
+*,
+::before,
+:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  font-family: $primary-font-family;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: $base-font-size;
+  min-height: 100vh;
+}
+
+svg {
+  width: 20px;
+  max-height: 20px;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 10px;
+  width: 60vw;
+  min-width: 250px;
+  max-width: 1024px;
+
+  background-color: pink;
+}
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px 10px 10px;
+  display: flex;
+
+  .app-form {
+    position: relative;
+    padding-left: 50%;
+    display: flex;
+    justify-content: left;
+
+    .select-wrapper {
+      position: relative;
+      right: 40%;
+      .font-select {
+        appearance: none;
+        background-color: transparent;
+        border: none;
+        padding: 0.2em 2em 0.2em 0.2em;
+        font-family: $primary-font-family;
+        color: $grey;
+        cursor: pointer;
+        outline: none;
+      }
+      .arrow-down {
+        position: absolute;
+        right: 5%;
+        top: 16%;
+        fill: $purple;
+        width: 15px;
+      }
+    }
+    .theme-wrapper {
+      position: relative;
+      top: 50%;
+      left: -20%;
+      transform: translate(-50%, -50%);
+
+      .moon {
+        width: 15px;
+        position: sticky;
+        transform: translate(300%, 20%);
+      }
+
+      .theme-input {
+        position: absolute;
+        width: 35px;
+        height: 20px;
+        appearance: none;
+        background-color: $grey;
+        outline: none;
+        border-radius: 20px;
+        transition: 0.5s;
+
+        &:checked {
+          background-color: $purple;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          border-radius: 20px;
+          top: 7%;
+          left: 5%;
+          background-color: $white;
+          transition: 0.5s;
+        }
+        &:checked:before {
+          left: 19px;
+        }
+      }
+    }
+  }
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  padding: 10px 5px 10px 10px;
+
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    background-color: #d1d5db;
+    border: none;
+    border-radius: 20px;
+    font-family: "Lora", serif;
+    font-weight: bold;
+  }
+  .search-label > .lens {
+    margin-top: 10px;
+  }
+}

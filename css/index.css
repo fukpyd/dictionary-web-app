@@ -1,0 +1,136 @@
+:root.light {
+  --primary-bg: #ffffff;
+  --primary-font-color: #000000;
+  --input-color: #ffffff;
+}
+
+:root:not(.light) {
+  --primary-bg: #000000;
+  --primary-font-color: #ffffff;
+  --input-color: #2a133b;
+}
+
+*,
+::before,
+:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  font-family: "Lora", serif;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+svg {
+  width: 20px;
+  max-height: 20px;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 10px;
+  width: 60vw;
+  min-width: 250px;
+  max-width: 1024px;
+  background-color: pink;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px 10px 10px;
+  display: flex;
+}
+.app-header .app-form {
+  position: relative;
+  padding-left: 50%;
+  display: flex;
+  justify-content: left;
+}
+.app-header .app-form .select-wrapper {
+  position: relative;
+  right: 40%;
+}
+.app-header .app-form .select-wrapper .font-select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0.2em 2em 0.2em 0.2em;
+  font-family: "Lora", serif;
+  color: #4a4a4a;
+  cursor: pointer;
+  outline: none;
+}
+.app-header .app-form .select-wrapper .arrow-down {
+  position: absolute;
+  right: 5%;
+  top: 16%;
+  fill: #a444f3;
+  width: 15px;
+}
+.app-header .app-form .theme-wrapper {
+  position: relative;
+  top: 50%;
+  left: -20%;
+  transform: translate(-50%, -50%);
+}
+.app-header .app-form .theme-wrapper .moon {
+  width: 15px;
+  position: sticky;
+  transform: translate(300%, 20%);
+}
+.app-header .app-form .theme-wrapper .theme-input {
+  position: absolute;
+  width: 35px;
+  height: 20px;
+  appearance: none;
+  background-color: #4a4a4a;
+  outline: none;
+  border-radius: 20px;
+  transition: 0.5s;
+}
+.app-header .app-form .theme-wrapper .theme-input:checked {
+  background-color: #a444f3;
+}
+.app-header .app-form .theme-wrapper .theme-input:before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  top: 7%;
+  left: 5%;
+  background-color: #ffffff;
+  transition: 0.5s;
+}
+.app-header .app-form .theme-wrapper .theme-input:checked:before {
+  left: 19px;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  padding: 10px 5px 10px 10px;
+}
+.search-form .search-input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  background-color: #d1d5db;
+  border: none;
+  border-radius: 20px;
+  font-family: "Lora", serif;
+  font-weight: bold;
+}
+.search-form .search-label > .lens {
+  margin-top: 10px;
+}
