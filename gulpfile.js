@@ -6,7 +6,7 @@ function buildStyles() {
 }
 
 function watchTask() {
-  watch(["index.scss"], buildStyles);
+  watch(["./index.scss", "partials/**/*.scss"], buildStyles);
 }
 
 exports.default = series(buildStyles, watchTask);
