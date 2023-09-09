@@ -1,0 +1,17 @@
+$theme-map-light: (
+  $--primary-bg: $white,
+  $--primary-font-color: $black,
+  $--input-color: $white,
+);
+
+$theme-map-dark: (
+  $--primary-bg: $black,
+  $--primary-font-color: $white,
+  $--input-color: $dark-purple,
+);
+
+@mixin theme-colors($map: ()) {
+  @each $key, $value in $map {
+    #{$key}: $value;
+  }
+}
