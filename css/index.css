@@ -1,13 +1,18 @@
-:root.light {
-  --primary-bg: #ffffff;
-  --primary-font-color: #000000;
-  --input-color: #ffffff;
-}
-
-:root:not(.light) {
+@charset "UTF-8";
+:root.dark {
   --primary-bg: #000000;
   --primary-font-color: #ffffff;
-  --input-color: #2a133b;
+  --input-color: #1f1f1f;
+  --icon-color: #a444f3;
+  --after-element: #a444f3;
+}
+
+:root:not(.dark) {
+  --primary-bg: #ffffff;
+  --primary-font-color: #000000;
+  --input-color: #ddd6fe;
+  --icon-color: #a444f3;
+  --after-element: #ffffff;
 }
 
 *,
@@ -20,12 +25,23 @@
 
 body {
   display: flex;
-  font-family: "Lora", serif;
-  margin: 20px;
+  flex-direction: column;
+  font-family: serif;
+  margin: 20px auto;
   justify-content: center;
   align-items: center;
   font-size: 16px;
   min-height: 100vh;
+  width: 50vw;
+  min-width: 250px;
+  max-width: 1024px;
+  background-color: var(--primary-bg);
+  color: var(--primary-font-color);
+}
+@media (max-width: 480px) {
+  body {
+    width: 100%;
+  }
 }
 
 svg {
@@ -38,10 +54,6 @@ svg {
   flex-direction: column;
   gap: 16px;
   padding-bottom: 10px;
-  width: 60vw;
-  min-width: 250px;
-  max-width: 1024px;
-  background-color: pink;
 }
 
 .app-header {
@@ -65,7 +77,7 @@ svg {
   background-color: transparent;
   border: none;
   padding: 0.2em 2em 0.2em 0.2em;
-  font-family: "Lora", serif;
+  font-family: serif;
   color: #4a4a4a;
   cursor: pointer;
   outline: none;
@@ -85,6 +97,7 @@ svg {
 }
 .app-header .app-form .theme-wrapper .moon {
   width: 15px;
+  fill: var(--icon-color);
   position: sticky;
   transform: translate(300%, 20%);
 }
@@ -119,18 +132,142 @@ svg {
 .search-form {
   display: flex;
   gap: 10px;
-  padding: 10px 5px 10px 10px;
+  padding: 10px 30px 10px 10px;
 }
 .search-form .search-input {
   width: 100%;
   padding: 10px;
   outline: none;
-  background-color: #d1d5db;
   border: none;
   border-radius: 20px;
-  font-family: "Lora", serif;
+  font-family: serif;
+  background-color: var(--input-color);
   font-weight: bold;
+  color: var(--primary-font-color);
 }
 .search-form .search-label > .lens {
+  width: 15px;
   margin-top: 10px;
+  cursor: pointer;
+  fill: var(--icon-color);
+}
+
+.result-wrapper {
+  padding: 10px;
+}
+.result-wrapper .lexico-entry {
+  display: flex;
+  justify-content: space-between;
+}
+.result-wrapper .lexico-entry .lexico-phrase {
+  font-size: clamp(1.5625rem, 0.9943rem + 2.8409vw, 2.8125rem);
+  font-weight: bold;
+}
+.result-wrapper .lexico-entry .pronunciation-button {
+  padding: 1rem;
+  border: none;
+  border-radius: 50%;
+  background-color: #e8d0fa;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .result-wrapper .lexico-entry .pronunciation-button {
+    padding: 0.5rem;
+  }
+}
+.result-wrapper .lexico-entry .pronunciation-button .button-icon {
+  fill: var(--icon-color);
+  padding-top: 2px;
+  padding-left: 5px;
+}
+.result-wrapper .lexico-pronunciation {
+  color: #a444f3;
+}
+
+.parts-of-speech {
+  padding-top: 2rem;
+}
+.parts-of-speech .part-of-speech-container {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+.parts-of-speech .part-of-speech-container .part-of-speech {
+  display: inline-block;
+  font-family: serif;
+  font-weight: bold;
+  font-size: clamp(0.875rem, 0.7045rem + 0.8523vw, 1.25rem);
+}
+.parts-of-speech .part-of-speech-container .purple-line-container {
+  padding-top: 7px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.parts-of-speech .part-of-speech-container .purple-line {
+  width: 100%;
+  border: 1px solid #a444f3;
+}
+.parts-of-speech .meaning {
+  display: inline-block;
+  padding-bottom: 0.8rem;
+  color: #9b9b9b;
+  font-size: clamp(0.75rem, 0.6364rem + 0.5682vw, 1rem);
+}
+.parts-of-speech .examples-list {
+  list-style: none;
+  color: #4a4a4a;
+  font-size: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
+  list-style-position: outside;
+}
+.parts-of-speech .examples-list .example {
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+.parts-of-speech .examples-list .example::before {
+  content: "•";
+  color: #a444f3;
+  position: absolute;
+  left: 1%;
+}
+.parts-of-speech .synonyms {
+  display: flex;
+  padding-top: 2rem;
+  gap: 10px;
+  font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
+}
+.parts-of-speech .synonyms .synonyms-tag {
+  color: #9b9b9b;
+}
+.parts-of-speech .synonyms .synonyms-list {
+  list-style: none;
+  color: #a444f3;
+  font-weight: bold;
+}
+.parts-of-speech .usage {
+  color: #9b9b9b;
+  font-size: 14px;
+  padding-left: 1rem;
+  font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
+}
+
+footer {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  font-size: 10px;
+  padding: 10px;
+  padding-top: 1.5rem;
+}
+footer .source-tag {
+  color: #9b9b9b;
+}
+footer .source {
+  color: #4a4a4a;
+}
+footer .copy-icon {
+  width: 8px;
+  cursor: pointer;
 }

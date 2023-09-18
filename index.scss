@@ -2,13 +2,14 @@
 @import "partials/variables";
 @import "partials/themes";
 @import "partials/mixins";
+@import "partials/breakpoints";
 
-:root.light {
-  @include theme-colors($theme-map-light);
+:root.dark {
+  @include theme-colors($theme-map-dark);
 }
 
-:root:not(.light) {
-  @include theme-colors($theme-map-dark);
+:root:not(.dark) {
+  @include theme-colors($theme-map-light);
 }
 
 *,
@@ -21,12 +22,22 @@
 
 body {
   display: flex;
+  flex-direction: column;
   font-family: $primary-font-family;
-  margin: 20px;
+  margin: 20px auto;
   justify-content: center;
   align-items: center;
   font-size: $base-font-size;
   min-height: 100vh;
+  width: 50vw;
+  min-width: 250px;
+  max-width: 1024px;
+  @include css-var-styles(background-color, $--primary-bg);
+  @include css-var-styles(color, $--primary-font-color);
+
+  @include breakpoint(medium) {
+    width: 100%;
+  }
 }
 
 svg {
@@ -39,12 +50,8 @@ svg {
   flex-direction: column;
   gap: 16px;
   padding-bottom: 10px;
-  width: 60vw;
-  min-width: 250px;
-  max-width: 1024px;
-
-  background-color: pink;
 }
+
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -86,6 +93,7 @@ svg {
 
       .moon {
         width: 15px;
+        @include css-var-styles(fill, $--icon-color);
         position: sticky;
         transform: translate(300%, 20%);
       }
@@ -126,19 +134,156 @@ svg {
 .search-form {
   display: flex;
   gap: 10px;
-  padding: 10px 5px 10px 10px;
+  padding: 10px 30px 10px 10px;
 
   .search-input {
     width: 100%;
     padding: 10px;
     outline: none;
-    background-color: #d1d5db;
     border: none;
     border-radius: 20px;
-    font-family: "Lora", serif;
+    font-family: $primary-font-family;
+    @include css-var-styles(background-color, $--input-color);
     font-weight: bold;
+    @include css-var-styles(color, $--primary-font-color);
   }
   .search-label > .lens {
+    width: 15px;
     margin-top: 10px;
+    cursor: pointer;
+    @include css-var-styles(fill, $--icon-color);
+  }
+}
+
+.result-wrapper {
+  padding: 10px;
+
+  .lexico-entry {
+    display: flex;
+    justify-content: space-between;
+
+    .lexico-phrase {
+      font-size: clamp(1.5625rem, 0.9943rem + 2.8409vw, 2.8125rem);
+      font-weight: bold;
+    }
+    .pronunciation-button {
+      padding: 1rem;
+      border: none;
+      border-radius: 50%;
+      background-color: $light-purple;
+      cursor: pointer;
+
+      @include breakpoint(large) {
+        padding: 0.5rem;
+      }
+
+      .button-icon {
+        @include css-var-styles(fill, $--icon-color);
+        padding-top: 2px;
+        padding-left: 5px;
+      }
+    }
+  }
+  .lexico-pronunciation {
+    color: $purple;
+  }
+}
+
+.parts-of-speech {
+  padding-top: 2rem;
+
+  .part-of-speech-container {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+
+    .part-of-speech {
+      display: inline-block;
+      font-family: $primary-font-family;
+      font-weight: bold;
+      font-size: clamp(0.875rem, 0.7045rem + 0.8523vw, 1.25rem);
+    }
+
+    .purple-line-container {
+      padding-top: 7px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .purple-line {
+      width: 100%;
+      border: 1px solid $purple;
+    }
+  }
+
+  .meaning {
+    display: inline-block;
+    padding-bottom: 0.8rem;
+    color: $light-grey;
+    font-size: clamp(0.75rem, 0.6364rem + 0.5682vw, 1rem);
+  }
+
+  .examples-list {
+    list-style: none;
+    color: $grey;
+    font-size: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
+    list-style-position: outside;
+
+    .example {
+      padding-bottom: 0.5rem;
+      padding-left: 1rem;
+      position: relative;
+
+      &::before {
+        content: "•";
+        color: $purple;
+        position: absolute;
+        left: 1%;
+      }
+    }
+  }
+
+  .synonyms {
+    display: flex;
+    padding-top: 2rem;
+    gap: 10px;
+    font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
+
+    .synonyms-tag {
+      color: $light-grey;
+    }
+    .synonyms-list {
+      list-style: none;
+      color: $purple;
+      font-weight: bold;
+    }
+  }
+
+  .usage {
+    color: $light-grey;
+    font-size: 14px;
+    padding-left: 1rem;
+    font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
+  }
+}
+
+footer {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  font-size: 10px;
+  padding: 10px;
+  padding-top: 1.5rem;
+  .source-tag {
+    color: $light-grey;
+  }
+  .source {
+    color: $grey;
+  }
+
+  .copy-icon {
+    width: 8px;
+    cursor: pointer;
   }
 }
