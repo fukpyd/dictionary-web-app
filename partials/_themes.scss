@@ -1,13 +1,17 @@
 $theme-map-light: (
   $--primary-bg: $white,
   $--primary-font-color: $black,
-  $--input-color: $white,
+  $--input-color: $lila-color,
+  $--icon-color: $purple,
+  $--after-element: $white,
 );
 
 $theme-map-dark: (
   $--primary-bg: $black,
   $--primary-font-color: $white,
-  $--input-color: $dark-purple,
+  $--input-color: $earie-black,
+  $--icon-color: $purple,
+  $--after-element: $purple,
 );
 
 @mixin theme-colors($map: ()) {

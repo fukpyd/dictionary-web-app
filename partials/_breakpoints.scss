@@ -1,0 +1,16 @@
+$breakpoints: (
+  "small": 320px,
+  "medium": 480px,
+  "large": 768px,
+  "wide": 1024px,
+);
+
+@mixin breakpoint($name) {
+  @if not map-has-key($breakpoints, $name) {
+    @warn "Invalid breakpoint name `#{$name}`";
+  } @else {
+    @media (max-width: map-get($breakpoints, $name)) {
+      @content;
+    }
+  }
+}
