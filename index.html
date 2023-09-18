@@ -27,9 +27,8 @@
         <form class="app-form">
           <div class="select-wrapper">
             <select class="font-select" name="font" id="font-select">
-              <option value="poppins">Poppins</option>
-              <option value="heebo">Heebo</option>
-              <option value="roboto">Roboto</option>
+              <option value="serif">Serif</option>
+              <option value="sans-serif">Sans-serif</option>
             </select>
             <label class="font-label" for="font-select">
               <svg class="arrow-down" viewBox="0 0 122.88 66.91">
@@ -61,7 +60,12 @@
         </form>
       </header>
       <form class="search-form">
-        <input class="search-input" id="search" name="keyword" />
+        <input
+          class="search-input"
+          id="search"
+          name="keyword"
+          placeholder="Search word"
+        />
         <label class="search-label" for="search">
           <svg
             width="15px"
@@ -79,7 +83,82 @@
           </svg>
         </label>
       </form>
+      <div class="result-wrapper">
+        <div class="lexico-entry">
+          <span class="lexico-phrase">keyboard</span>
+          <button class="pronunciation-button">
+            <svg class="button-icon" viewBox="0 0 63.9 122.88">
+              <style type="text/css"></style>
+              <g>
+                <polygon
+                  class="st0"
+                  points="63.9,61.44 0,122.88 0,0 63.9,61.44"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <span class="lexico-pronunciation">/'kiːbɔːd/</span>
+        <div class="parts-of-speech">
+          <div class="part-of-speech-container">
+            <span class="part-of-speech">noun</span>
+            <div class="purple-line-container">
+              <div class="purple-line"></div>
+            </div>
+          </div>
+          <span class="meaning">Meaning</span>
+          <ul class="examples-list">
+            <li class="example">
+              (etc.) A set of keys ussed to operate a typewriter, computer, etc.
+            </li>
+            <li class="example">
+              A component of many instruments including the piano, organ, and
+              harpsihord consisting of usually black and white keys that cause
+              different tones to be produced when struck.
+            </li>
+            <li class="example">
+              A device with keys of a musical keyboard, used to control
+              electronic sound - producing devices which may be built into or
+              separate from the keyboard device.
+            </li>
+          </ul>
+          <div class="synonyms">
+            <span class="synonyms-tag">Synonyms</span>
+            <ul class="synonyms-list">
+              <li class="synonym-item">electronic keyboard</li>
+            </ul>
+          </div>
+        </div>
+        <div class="parts-of-speech">
+          <div class="part-of-speech-container">
+            <span class="part-of-speech">noun</span>
+            <div class="purple-line-container">
+              <div class="purple-line"></div>
+            </div>
+          </div>
+          <span class="meaning">Meaning</span>
+          <ul class="examples-list">
+            <li class="example">To type on a computer keyboard.</li>
+          </ul>
+          <span class="usage"
+            >"Keyboarding is the part of this job I hate the most"</span
+          >
+        </div>
+      </div>
     </main>
-    <script src="index.js"></script>
+    <script src="js/index.js" type="module"></script>
+    <footer>
+      <span class="source-tag">Source</span>
+      <a href="https://en.wiktionary.org/wiki/keyboard" class="source"
+        >https://en.wiktionary.org/wiki/keyboard</a
+      >
+      <svg class="copy-icon" viewBox="0 0 100.56 122.88">
+        <g>
+          <path
+            d="M72.15,112.2L90.4,93H72.15V112.2L72.15,112.2z M81.75,9.2c0,1.69-1.37,3.05-3.05,3.05c-1.69,0-3.05-1.37-3.05-3.05V6.11 H6.11v92.24h3.01c1.69,0,3.05,1.37,3.05,3.05c0,1.69-1.37,3.05-3.05,3.05H5.48c-1.51,0-2.88-0.61-3.87-1.61l0.01-0.01 c-1-1-1.61-2.37-1.61-3.87V5.48C0,3.97,0.61,2.6,1.61,1.61C2.6,0.61,3.97,0,5.48,0h70.79c1.5,0,2.87,0.62,3.86,1.61l0,0l0.01,0.01 c0.99,0.99,1.61,2.36,1.61,3.86V9.2L81.75,9.2z M100.56,90.55c0,1.4-0.94,2.58-2.22,2.94l-26.88,28.27 c-0.56,0.68-1.41,1.11-2.36,1.11c-0.06,0-0.12,0-0.19-0.01c-0.06,0-0.12,0.01-0.18,0.01H24.29c-1.51,0-2.88-0.61-3.87-1.61 l0.01-0.01l-0.01-0.01c-0.99-0.99-1.61-2.36-1.61-3.86v-93.5c0-1.51,0.62-2.88,1.61-3.87l0.01,0.01c1-0.99,2.37-1.61,3.86-1.61 h70.79c1.5,0,2.87,0.62,3.86,1.61l0,0l0.01,0.01c0.99,0.99,1.61,2.36,1.61,3.86V90.55L100.56,90.55z M94.45,86.9V24.54H24.92v92.24 h41.13V89.95c0-1.69,1.37-3.05,3.05-3.05H94.45L94.45,86.9z"
+          />
+        </g>
+      </svg>
+    </footer>
   </body>
 </html>
