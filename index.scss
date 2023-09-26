@@ -25,7 +25,6 @@ body {
   flex-direction: column;
   font-family: $primary-font-family;
   margin: 20px auto;
-  justify-content: center;
   align-items: center;
   font-size: $base-font-size;
   min-height: 100vh;
@@ -46,10 +45,16 @@ svg {
 }
 
 .app-wrapper {
+  width: 50vw;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding-bottom: 10px;
+
+  @include breakpoint(medium) {
+    width: 100%;
+  }
 }
 
 .app-header {
@@ -224,15 +229,15 @@ svg {
     font-size: clamp(0.75rem, 0.6364rem + 0.5682vw, 1rem);
   }
 
-  .examples-list {
+  .definitions-list {
     list-style: none;
     color: $grey;
     font-size: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
     list-style-position: outside;
 
-    .example {
+    .definition {
       padding-bottom: 0.5rem;
-      padding-left: 1rem;
+      padding-left: 2rem;
       position: relative;
 
       &::before {
@@ -254,6 +259,8 @@ svg {
       color: $light-grey;
     }
     .synonyms-list {
+      display: flex;
+      gap: 10px;
       list-style: none;
       color: $purple;
       font-weight: bold;
@@ -285,5 +292,31 @@ footer {
   .copy-icon {
     width: 8px;
     cursor: pointer;
+  }
+}
+.search-message {
+  .message-heading {
+    padding-bottom: 20px;
+    font-size: clamp(2.1875rem, 2.3295rem + -0.7102vw, 1.275rem);
+
+    .query {
+      @include css-var-styles(color, $--icon-color);
+    }
+  }
+}
+
+.suggestions {
+  font-size: clamp(1.25rem, 1.3636rem + -0.5682vw, 1rem);
+}
+
+.suggestions-list {
+  padding: 20px;
+
+  .suggestion-item {
+    padding-bottom: 8px;
+
+    &::marker {
+      @include css-var-styles(color, $--icon-color);
+    }
   }
 }

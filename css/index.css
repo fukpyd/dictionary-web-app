@@ -28,7 +28,6 @@ body {
   flex-direction: column;
   font-family: serif;
   margin: 20px auto;
-  justify-content: center;
   align-items: center;
   font-size: 16px;
   min-height: 100vh;
@@ -50,10 +49,17 @@ svg {
 }
 
 .app-wrapper {
+  width: 50vw;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding-bottom: 10px;
+}
+@media (max-width: 480px) {
+  .app-wrapper {
+    width: 100%;
+  }
 }
 
 .app-header {
@@ -215,18 +221,18 @@ svg {
   color: #9b9b9b;
   font-size: clamp(0.75rem, 0.6364rem + 0.5682vw, 1rem);
 }
-.parts-of-speech .examples-list {
+.parts-of-speech .definitions-list {
   list-style: none;
   color: #4a4a4a;
   font-size: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
   list-style-position: outside;
 }
-.parts-of-speech .examples-list .example {
+.parts-of-speech .definitions-list .definition {
   padding-bottom: 0.5rem;
-  padding-left: 1rem;
+  padding-left: 2rem;
   position: relative;
 }
-.parts-of-speech .examples-list .example::before {
+.parts-of-speech .definitions-list .definition::before {
   content: "•";
   color: #a444f3;
   position: absolute;
@@ -242,6 +248,8 @@ svg {
   color: #9b9b9b;
 }
 .parts-of-speech .synonyms .synonyms-list {
+  display: flex;
+  gap: 10px;
   list-style: none;
   color: #a444f3;
   font-weight: bold;
@@ -270,4 +278,26 @@ footer .source {
 footer .copy-icon {
   width: 8px;
   cursor: pointer;
+}
+
+.search-message .message-heading {
+  padding-bottom: 20px;
+  font-size: clamp(2.1875rem, 2.3295rem - 0.7102vw, 1.275rem);
+}
+.search-message .message-heading .query {
+  color: var(--icon-color);
+}
+
+.suggestions {
+  font-size: clamp(1.25rem, 1.3636rem - 0.5682vw, 1rem);
+}
+
+.suggestions-list {
+  padding: 20px;
+}
+.suggestions-list .suggestion-item {
+  padding-bottom: 8px;
+}
+.suggestions-list .suggestion-item::marker {
+  color: var(--icon-color);
 }
