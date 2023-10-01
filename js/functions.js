@@ -1,45 +1,46 @@
-// const createResultHeader = function (word, pronunciation, audio) {
-//   const word = data[0].word;
+export const createResultHeader = function (data) {
+  const word = data[0].word;
+  const phonetics = data[0].phonetics;
 
-//   const phonetics = data[0].phonetics;
-//   const phoneticDetails = phonetics.find((el) => el.text && el.audio);
+  const pronunciation = phonetics.find((el) => el.text && el.audio);
 
-//   // tutaj mam zapis fonetyczny i link do audio, potem wyciągam dane z OBIEKTU czyli np. phoneticDetails.text
-// const playButton = document.createElement("button");
-// playButton.classList.add("pronunciation-button");
+  const headerContainer = document.createElement("header");
+  headerContainer.classList.add("lexico-entry");
 
-//   const headingStructure = `
+  const textWrapper = document.createElement("div");
+  textWrapper.classList.add("lexico-left-column");
 
-// <div class="lexico-entry">
-//           <span class="lexico-phrase">${word}</span>
-//           <button class="pronunciation-button">
-//             <svg class="button-icon" viewBox="0 0 63.9 122.88">
-//               <style type="text/css"></style>
-//               <g>
-//                 <polygon
-//                   class="st0"
-//                   points="63.9,61.44 0,122.88 0,0 63.9,61.44"
-//                 />
-//               </g>
-//             </svg>
-//           </button>
-//         </div>
-//         <span class="lexico-pronunciation">/${phoneticDetails.text}</span>`;
-// };
+  const phrase = document.createElement("span");
+  phrase.classList.add("lexico-phrase");
+  phrase.textContent = word;
 
-const createResultItem = function (partOfSpeech, definitions, synonyms) {
+  const pronunciationText = document.createElement("span");
+  pronunciationText.classList.add("lexico-pronunciation");
+  pronunciationText.textContent = pronunciation.text;
+
+  const audio = document.createElement("audio");
+  audio.classList.add("audio");
+  audio.src = pronunciation.audio;
+
+  const playButton = document.createElement("button");
+  playButton.classList.add("pronunciation-button");
+
+  playButton.addEventListener("click", () => audio.play());
+
+  const speakerIcon = document.createElement("span");
+  speakerIcon.classList.add("speaker");
+  speakerIcon.innerHTML = "&#128362";
+
+  textWrapper.append(phrase, pronunciationText);
+
+  playButton.appendChild(speakerIcon);
+
+  headerContainer.append(textWrapper, playButton, audio);
+  return headerContainer;
+};
+
+const createResultListItem = function (partOfSpeech, definitions, synonyms) {
   const definitionsList = definitions.map((el) => el.definition);
-
-  console.log("definitions", definitionsList);
-  console.log("synonimy", synonyms);
-
-  const x = definitionsList.map((definition) => {
-    return `<li class="definition">${definition}</li>`;
-  });
-
-  console.log("x", x);
-  console.log(x.join(""));
-
   return `
         <div class="parts-of-speech">
           <div class="part-of-speech-container">
@@ -69,20 +70,58 @@ const createResultItem = function (partOfSpeech, definitions, synonyms) {
     </div>`;
 };
 
-{
-}
-
-export const createResultContent = function (data) {
+export const createResult = function (data) {
   const meanings = data.map((element) => element.meanings).flat();
   console.log("meanings", meanings);
 
-  const dupa7 = meanings.map((meaning) =>
-    createResultItem(
-      meaning.partOfSpeech,
-      meaning.definitions,
-      meaning.synonyms
-    )
-  );
+  //   const resultHeader = createResultHeader(data);
 
-  return dupa7.join("");
+  const resultItems = meanings
+    .map((meanings) =>
+      createResultListItem(
+        meanings.partOfSpeech,
+        meanings.definitions,
+        meanings.synonyms
+      )
+    )
+    .join("");
+
+  //   const showResultItems = meanings.map(
+  //     ({ partOfSpeech, definitions, synonyms }) =>
+  //       createResultItem(partOfSpeech, definitions, synonyms)
+  //   );
+
+  return resultItems;
+};
+
+export const showNoResult = function (error, query) {
+  const searchMessage = `
+  <div class="search-message">
+    <h1 class="message-heading">${error.title} for <span class="query"> "${query}"</span></h1>
+    <span class="suggestions">Some suggestions</span>
+    <ul class="suggestions-list">
+      <li class="suggestion-item">Check spelling of all words</li>
+      <li class="suggestion-item">Try different words mean the same thing</li>
+      <li class="suggestion-item">Enter fewer words</li>
+    </ul>
+  </div>
+  `;
+
+  resultWrapper.insertAdjacentHTML("afterbegin", searchMessage);
+};
+
+export const createFooter = function (data) {
+  const url = data[0]?.sourceUrls[0];
+
+  const footerText = `<footer>
+  <span class="source-tag">Source</span>
+    <a href="${url}" class="source">${url}</a>
+    </footer>`;
+
+  return footerText;
+};
+
+export const changeFontStyle = function (event) {
+  [...document.getElementsByTagName("body")][0].style.fontFamily =
+    event.target.value;
 };
