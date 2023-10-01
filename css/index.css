@@ -44,8 +44,7 @@ body {
 }
 
 svg {
-  width: 20px;
-  max-height: 20px;
+  min-width: 1vw;
 }
 
 .app-wrapper {
@@ -53,8 +52,8 @@ svg {
   min-width: 250px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding-bottom: 10px;
+  gap: 20px;
+  padding: 0 10px;
 }
 @media (max-width: 480px) {
   .app-wrapper {
@@ -65,55 +64,58 @@ svg {
 .app-header {
   display: flex;
   justify-content: space-between;
-  padding: 10px 25px 10px 10px;
-  display: flex;
+  gap: 20px;
+}
+.app-header .logo {
+  font-size: clamp(2rem, 3vw, 3rem);
 }
 .app-header .app-form {
-  position: relative;
-  padding-left: 50%;
   display: flex;
-  justify-content: left;
+  align-items: center;
+  gap: 20px;
 }
 .app-header .app-form .select-wrapper {
+  display: flex;
+  align-items: center;
   position: relative;
-  right: 40%;
+  gap: 5px;
 }
 .app-header .app-form .select-wrapper .font-select {
   appearance: none;
   background-color: transparent;
   border: none;
-  padding: 0.2em 2em 0.2em 0.2em;
+  padding: 0.3em;
   font-family: serif;
-  color: #4a4a4a;
+  color: #9b9b9b;
   cursor: pointer;
-  outline: none;
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
-.app-header .app-form .select-wrapper .arrow-down {
-  position: absolute;
-  right: 5%;
-  top: 16%;
-  fill: #a444f3;
+.app-header .app-form .select-wrapper .font-label {
+  display: inline-block;
   width: 15px;
+  height: 15px;
+}
+.app-header .app-form .select-wrapper .font-label .arrow-down {
+  fill: #a444f3;
 }
 .app-header .app-form .theme-wrapper {
   position: relative;
-  top: 50%;
-  left: -20%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 5px;
 }
-.app-header .app-form .theme-wrapper .moon {
-  width: 15px;
+.app-header .app-form .theme-wrapper .theme-label {
+  display: flex;
+  align-items: center;
+}
+.app-header .app-form .theme-wrapper .theme-label .moon {
   fill: var(--icon-color);
-  position: sticky;
-  transform: translate(300%, 20%);
+  width: 15px;
 }
 .app-header .app-form .theme-wrapper .theme-input {
-  position: absolute;
-  width: 35px;
-  height: 20px;
   appearance: none;
   background-color: #4a4a4a;
-  outline: none;
+  width: 40px;
+  height: 20px;
   border-radius: 20px;
   transition: 0.5s;
 }
@@ -121,72 +123,84 @@ svg {
   background-color: #a444f3;
 }
 .app-header .app-form .theme-wrapper .theme-input:before {
-  content: "";
   position: absolute;
-  width: 15px;
-  height: 15px;
+  content: "";
+  width: 17px;
+  height: 17px;
   border-radius: 20px;
-  top: 7%;
-  left: 5%;
+  top: 9%;
+  left: 1%;
   background-color: #ffffff;
   transition: 0.5s;
 }
 .app-header .app-form .theme-wrapper .theme-input:checked:before {
-  left: 19px;
+  left: 22px;
 }
 
 .search-form {
+  position: relative;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
-  padding: 10px 30px 10px 10px;
 }
 .search-form .search-input {
   width: 100%;
   padding: 10px;
-  outline: none;
   border: none;
   border-radius: 20px;
+  font-size: clamp(1rem, 3vw, 1.5rem);
   font-family: serif;
   background-color: var(--input-color);
   font-weight: bold;
   color: var(--primary-font-color);
 }
+.search-form .search-input::placeholder {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: #9b9b9b;
+}
+.search-form .search-label {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
 .search-form .search-label > .lens {
-  width: 15px;
-  margin-top: 10px;
+  width: 2vw;
+  min-width: 15px;
+  max-width: 40px;
   cursor: pointer;
   fill: var(--icon-color);
 }
 
-.result-wrapper {
-  padding: 10px;
-}
 .result-wrapper .lexico-entry {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.result-wrapper .lexico-entry .lexico-left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .result-wrapper .lexico-entry .lexico-phrase {
-  font-size: clamp(1.5625rem, 0.9943rem + 2.8409vw, 2.8125rem);
+  font-size: clamp(2.5rem, 6vw, 3rem);
   font-weight: bold;
 }
 .result-wrapper .lexico-entry .pronunciation-button {
-  padding: 1rem;
+  padding: 1rem 1.275rem;
   border: none;
   border-radius: 50%;
   background-color: #e8d0fa;
   cursor: pointer;
 }
-@media (max-width: 768px) {
-  .result-wrapper .lexico-entry .pronunciation-button {
-    padding: 0.5rem;
-  }
-}
-.result-wrapper .lexico-entry .pronunciation-button .button-icon {
-  fill: var(--icon-color);
-  padding-top: 2px;
-  padding-left: 5px;
+.result-wrapper .lexico-entry .pronunciation-button .speaker {
+  font-size: 1.7rem;
+  vertical-align: middle;
+  color: var(--icon-color);
 }
 .result-wrapper .lexico-pronunciation {
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #a444f3;
 }
 
@@ -203,7 +217,7 @@ svg {
   display: inline-block;
   font-family: serif;
   font-weight: bold;
-  font-size: clamp(0.875rem, 0.7045rem + 0.8523vw, 1.25rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
 }
 .parts-of-speech .part-of-speech-container .purple-line-container {
   padding-top: 7px;
@@ -219,36 +233,37 @@ svg {
   display: inline-block;
   padding-bottom: 0.8rem;
   color: #9b9b9b;
-  font-size: clamp(0.75rem, 0.6364rem + 0.5682vw, 1rem);
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
 }
 .parts-of-speech .definitions-list {
   list-style: none;
   color: #4a4a4a;
-  font-size: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
   list-style-position: outside;
 }
 .parts-of-speech .definitions-list .definition {
   padding-bottom: 0.5rem;
-  padding-left: 2rem;
+  padding-left: 2.1rem;
   position: relative;
 }
 .parts-of-speech .definitions-list .definition::before {
   content: "•";
   color: #a444f3;
   position: absolute;
-  left: 1%;
+  left: 3%;
 }
 .parts-of-speech .synonyms {
   display: flex;
   padding-top: 2rem;
   gap: 10px;
-  font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
 }
 .parts-of-speech .synonyms .synonyms-tag {
   color: #9b9b9b;
 }
 .parts-of-speech .synonyms .synonyms-list {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   list-style: none;
   color: #a444f3;
@@ -265,8 +280,7 @@ footer {
   display: flex;
   gap: 10px;
   width: 100%;
-  font-size: 10px;
-  padding: 10px;
+  font-size: clamp(0.8rem, 1vw, 1rem);
   padding-top: 1.5rem;
 }
 footer .source-tag {
@@ -274,10 +288,6 @@ footer .source-tag {
 }
 footer .source {
   color: #4a4a4a;
-}
-footer .copy-icon {
-  width: 8px;
-  cursor: pointer;
 }
 
 .search-message .message-heading {
