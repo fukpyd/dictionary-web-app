@@ -162,6 +162,10 @@ svg {
       font-size: clamp(1rem, 2vw, 1.3rem);
       color: $light-grey;
     }
+
+    &.no-query-message {
+      outline: 2px solid red;
+    }
   }
 
   .search-label {
@@ -169,13 +173,18 @@ svg {
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-  }
-  .search-label > .lens {
-    width: 2vw;
-    min-width: 15px;
-    max-width: 40px;
-    cursor: pointer;
-    @include css-var-styles(fill, $--icon-color);
+
+    .search-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+
+      .lens {
+        min-width: 20px;
+        max-width: 40px;
+      }
+    }
   }
 }
 
@@ -335,4 +344,11 @@ footer {
       @include css-var-styles(color, $--icon-color);
     }
   }
+}
+
+.instruction {
+  display: block;
+  padding-top: 20px;
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2.1875rem);
 }

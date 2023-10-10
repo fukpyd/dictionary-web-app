@@ -159,18 +159,24 @@ svg {
   font-size: clamp(1rem, 2vw, 1.3rem);
   color: #9b9b9b;
 }
+.search-form .search-input.no-query-message {
+  outline: 2px solid red;
+}
 .search-form .search-label {
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
 }
-.search-form .search-label > .lens {
-  width: 2vw;
-  min-width: 15px;
-  max-width: 40px;
+.search-form .search-label .search-button {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
-  fill: var(--icon-color);
+  padding: 5px;
+}
+.search-form .search-label .search-button .lens {
+  min-width: 20px;
+  max-width: 40px;
 }
 
 .result-wrapper .lexico-entry {
@@ -310,4 +316,11 @@ footer .source {
 }
 .suggestions-list .suggestion-item::marker {
   color: var(--icon-color);
+}
+
+.instruction {
+  display: block;
+  padding-top: 20px;
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2.1875rem);
 }
