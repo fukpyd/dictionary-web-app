@@ -1,41 +1,46 @@
 export const createResultHeader = function (data) {
   const word = data[0].word;
-  const phonetics = data[0].phonetics;
-
-  const pronunciation = phonetics.find((el) => el.text && el.audio);
 
   const headerContainer = document.createElement("header");
   headerContainer.classList.add("lexico-entry");
-
   const textWrapper = document.createElement("div");
   textWrapper.classList.add("lexico-left-column");
-
   const phrase = document.createElement("span");
   phrase.classList.add("lexico-phrase");
   phrase.textContent = word;
+  textWrapper.appendChild(phrase);
+  headerContainer.appendChild(textWrapper);
 
-  const pronunciationText = document.createElement("span");
-  pronunciationText.classList.add("lexico-pronunciation");
-  pronunciationText.textContent = pronunciation.text;
+  const phonetics = data[0].phonetics;
 
-  const audio = document.createElement("audio");
-  audio.classList.add("audio");
-  audio.src = pronunciation.audio;
+  let phoneticDetails = phonetics.find((el) => el.text && el.audio);
 
-  const playButton = document.createElement("button");
-  playButton.classList.add("pronunciation-button");
+  phoneticDetails = phoneticDetails
+    ? phoneticDetails
+    : phonetics.find(
+        (phonetic) =>
+          phonetic.hasOwnProperty?.("text") &&
+          phonetic.hasOwnProperty?.("audio")
+      );
 
-  playButton.addEventListener("click", () => audio.play());
+  console.log(phoneticDetails);
 
-  const speakerIcon = document.createElement("span");
-  speakerIcon.classList.add("speaker");
-  speakerIcon.innerHTML = "&#128362";
+  if (!phoneticDetails) {
+    return headerContainer;
+  }
 
-  textWrapper.append(phrase, pronunciationText);
+  const { audio, text } = phoneticDetails;
 
-  playButton.appendChild(speakerIcon);
+  if (text) {
+    const pronunciationText = createPronunciationElement(text);
+    textWrapper.appendChild(pronunciationText);
+  }
 
-  headerContainer.append(textWrapper, playButton, audio);
+  if (audio) {
+    const audioElement = createAudioElement(audio);
+    headerContainer.append(audioElement);
+  }
+
   return headerContainer;
 };
 
@@ -94,10 +99,10 @@ export const createResult = function (data) {
   return resultItems;
 };
 
-export const showNoResult = function (error, query) {
+export const showNoResult = function (query) {
   const searchMessage = `
   <div class="search-message">
-    <h1 class="message-heading">${error.title} for <span class="query"> "${query}"</span></h1>
+    <h1 class="message-heading">No results found for <span class="query"> "${query}"</span></h1>
     <span class="suggestions">Some suggestions</span>
     <ul class="suggestions-list">
       <li class="suggestion-item">Check spelling of all words</li>
@@ -106,8 +111,7 @@ export const showNoResult = function (error, query) {
     </ul>
   </div>
   `;
-
-  resultWrapper.insertAdjacentHTML("afterbegin", searchMessage);
+  return searchMessage;
 };
 
 export const createFooter = function (data) {
@@ -124,4 +128,49 @@ export const createFooter = function (data) {
 export const changeFontStyle = function (event) {
   [...document.getElementsByTagName("body")][0].style.fontFamily =
     event.target.value;
+};
+
+export const showNoQuery = function (element, elementClass, elementWrapper) {
+  if (elementWrapper.querySelector(".search-message")) {
+    return;
+  }
+  const noQueryMessage = `
+  <div class="search-message">
+    <span class="instruction">Input cannot be empty</span>
+  </div>
+  `;
+  element.classList.add(elementClass);
+  return noQueryMessage;
+};
+
+export const clearResultWrapper = function (
+  elementWrapper,
+  element,
+  elementClass
+) {
+  element.value = "";
+  element.classList.remove(elementClass);
+  elementWrapper.innerHTML = "";
+};
+
+const createPronunciationElement = function (text) {
+  const pronunciationText = document.createElement("span");
+  pronunciationText.classList.add("lexico-pronunciation");
+  pronunciationText.textContent = text;
+
+  return pronunciationText;
+};
+
+const createAudioElement = function (audio) {
+  const listenAudio = document.createElement("audio");
+  listenAudio.classList.add("audio");
+  listenAudio.src = audio;
+  const playButton = document.createElement("button");
+  playButton.classList.add("pronunciation-button");
+  const speakerIcon = document.createElement("span");
+  speakerIcon.classList.add("speaker");
+  speakerIcon.innerHTML = "&#128362";
+  playButton.appendChild(speakerIcon);
+  playButton.addEventListener("click", () => listenAudio.play());
+  return playButton;
 };
