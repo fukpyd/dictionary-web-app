@@ -49,7 +49,7 @@ const handleSubmit = async function (event, url, query, element, elementClass) {
   const data = await getData(url, query);
 
   if (!Array.isArray(data) && !data?.length) {
-    const noResultMessage = showNoResult(query, searchInput);
+    const noResultMessage = showNoResult(query);
     resultWrapper.insertAdjacentHTML("afterbegin", noResultMessage);
     return;
   }
