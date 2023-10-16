@@ -26,115 +26,105 @@
 body {
   display: flex;
   flex-direction: column;
-  font-family: serif;
-  margin: 20px auto;
   align-items: center;
-  font-size: 16px;
   min-height: 100vh;
-  width: 50vw;
-  min-width: 250px;
-  max-width: 1024px;
+  margin: 16px 0;
+  font-family: serif;
+  font-size: 16px;
   background-color: var(--primary-bg);
   color: var(--primary-font-color);
 }
-@media (max-width: 480px) {
-  body {
-    width: 100%;
-  }
-}
-
-svg {
-  min-width: 1vw;
-}
 
 .app-wrapper {
-  width: 50vw;
-  min-width: 250px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 0 10px;
+  gap: 24px;
+  width: 50vw;
+  min-width: 250px;
+  max-width: 1024px;
+  padding: 0 8px;
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .app-wrapper {
     width: 100%;
+    padding: 0 24px;
   }
 }
 
 .app-header {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
 }
 .app-header .logo {
   font-size: clamp(2rem, 3vw, 3rem);
 }
-.app-header .app-form {
+.app-header .header-controls {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 32px;
 }
-.app-header .app-form .select-wrapper {
+.app-header .header-controls .select-wrapper {
   display: flex;
   align-items: center;
   position: relative;
-  gap: 5px;
+  gap: 8px;
 }
-.app-header .app-form .select-wrapper .font-select {
+.app-header .header-controls .select-wrapper .font-select {
   appearance: none;
-  background-color: transparent;
+  padding: 8px;
   border: none;
-  padding: 0.3em;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   font-family: serif;
+  background-color: transparent;
   color: #9b9b9b;
   cursor: pointer;
-  font-size: clamp(1rem, 2vw, 1.3rem);
 }
-.app-header .app-form .select-wrapper .font-label {
+.app-header .header-controls .select-wrapper .font-label {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
-.app-header .app-form .select-wrapper .font-label .arrow-down {
+.app-header .header-controls .select-wrapper .font-label .arrow-down {
   fill: #a444f3;
 }
-.app-header .app-form .theme-wrapper {
-  position: relative;
+.app-header .header-controls .theme-wrapper {
   display: flex;
-  gap: 5px;
+  gap: 8px;
 }
-.app-header .app-form .theme-wrapper .theme-label {
+.app-header .header-controls .theme-wrapper .theme-label {
   display: flex;
   align-items: center;
 }
-.app-header .app-form .theme-wrapper .theme-label .moon {
+.app-header .header-controls .theme-wrapper .theme-label .moon {
   fill: var(--icon-color);
-  width: 15px;
+  width: 24px;
 }
-.app-header .app-form .theme-wrapper .theme-input {
+.app-header .header-controls .theme-wrapper .theme-input {
+  position: relative;
   appearance: none;
+  width: 54px;
+  height: 32px;
+  border-radius: 24px;
   background-color: #4a4a4a;
-  width: 40px;
-  height: 20px;
-  border-radius: 20px;
   transition: 0.5s;
 }
-.app-header .app-form .theme-wrapper .theme-input:checked {
+.app-header .header-controls .theme-wrapper .theme-input:checked {
   background-color: #a444f3;
 }
-.app-header .app-form .theme-wrapper .theme-input:before {
+.app-header .header-controls .theme-wrapper .theme-input:before {
   position: absolute;
   content: "";
-  width: 17px;
-  height: 17px;
+  width: 24px;
+  height: 24px;
   border-radius: 20px;
-  top: 9%;
-  left: 1%;
+  top: 10%;
+  left: 5%;
   background-color: #ffffff;
   transition: 0.5s;
 }
-.app-header .app-form .theme-wrapper .theme-input:checked:before {
-  left: 22px;
+.app-header .header-controls .theme-wrapper .theme-input:checked:before {
+  left: 95%;
+  transform: translateX(-100%);
 }
 
 .search-form {
@@ -142,185 +132,167 @@ svg {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 .search-form .search-input {
   width: 100%;
-  padding: 10px;
+  padding: 16px;
   border: none;
-  border-radius: 20px;
+  border-radius: 24px;
   font-size: clamp(1rem, 3vw, 1.5rem);
-  font-family: serif;
+  font-family: inherit;
   background-color: var(--input-color);
-  font-weight: bold;
   color: var(--primary-font-color);
 }
 .search-form .search-input::placeholder {
   font-size: clamp(1rem, 2vw, 1.3rem);
   color: #9b9b9b;
 }
-.search-form .search-input.no-query-message {
+.search-form .search-input.red-outline {
   outline: 2px solid red;
 }
 .search-form .search-label {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 8px;
   transform: translateY(-50%);
 }
 .search-form .search-label .search-button {
-  background-color: transparent;
+  padding: 8px;
   border: none;
+  background-color: transparent;
   cursor: pointer;
-  padding: 5px;
 }
 .search-form .search-label .search-button .lens {
-  min-width: 20px;
-  max-width: 40px;
+  width: 24px;
+  fill: #a444f3;
 }
 
-.result-wrapper .lexico-entry {
+.result-wrapper .result-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.result-wrapper .lexico-entry .lexico-left-column {
+.result-wrapper .result-header .left-column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
-.result-wrapper .lexico-entry .lexico-phrase {
+.result-wrapper .result-header .left-column .phrase {
   font-size: clamp(2.5rem, 6vw, 3rem);
   font-weight: bold;
 }
-.result-wrapper .lexico-entry .pronunciation-button {
+.result-wrapper .result-header .left-column .pronunciation {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #a444f3;
+}
+.result-wrapper .result-header .pronunciation-button {
+  background-color: #e8d0fa;
   padding: 1rem 1.275rem;
   border: none;
   border-radius: 50%;
-  background-color: #e8d0fa;
   cursor: pointer;
 }
-.result-wrapper .lexico-entry .pronunciation-button .speaker {
-  font-size: 1.7rem;
-  vertical-align: middle;
+.result-wrapper .result-header .pronunciation-button .speaker-icon {
+  font-size: 32px;
   color: var(--icon-color);
 }
-.result-wrapper .lexico-pronunciation {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  color: #a444f3;
+.result-wrapper .result-content-list {
+  list-style: none;
 }
-
-.parts-of-speech {
-  padding-top: 2rem;
+.result-wrapper .result-content-list .parts-of-speech {
+  padding-top: 32px;
 }
-.parts-of-speech .part-of-speech-container {
+.result-wrapper .result-content-list .parts-of-speech .type-container {
   width: 100%;
-  display: flex;
-  gap: 1rem;
-  padding-bottom: 1rem;
-}
-.parts-of-speech .part-of-speech-container .part-of-speech {
-  display: inline-block;
-  font-family: serif;
-  font-weight: bold;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-}
-.parts-of-speech .part-of-speech-container .purple-line-container {
-  padding-top: 7px;
   display: flex;
   align-items: center;
-  width: 100%;
+  gap: 8px;
+  padding-bottom: 8px;
 }
-.parts-of-speech .part-of-speech-container .purple-line {
-  width: 100%;
-  border: 1px solid #a444f3;
-}
-.parts-of-speech .meaning {
+.result-wrapper .result-content-list .parts-of-speech .type-container .type {
   display: inline-block;
-  padding-bottom: 0.8rem;
-  color: #9b9b9b;
-  font-size: clamp(1.3rem, 3vw, 1.5rem);
+  font-family: serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
 }
-.parts-of-speech .definitions-list {
+.result-wrapper .result-content-list .parts-of-speech .type-container .purple-line {
+  width: 100%;
+  height: 1px;
+  transform: translateY(2px);
+  background-color: #a444f3;
+}
+.result-wrapper .result-content-list .parts-of-speech .meaning {
+  display: inline-block;
+  padding-bottom: 8px;
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
+  color: #9b9b9b;
+}
+.result-wrapper .result-content-list .parts-of-speech .definitions-list {
   list-style: none;
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
   color: #4a4a4a;
-  font-size: clamp(1.3rem, 3vw, 1.5rem);
-  list-style-position: outside;
 }
-.parts-of-speech .definitions-list .definition {
-  padding-bottom: 0.5rem;
-  padding-left: 2.1rem;
+.result-wrapper .result-content-list .parts-of-speech .definitions-list .definition {
   position: relative;
+  padding-bottom: 8px;
+  padding-left: 16px;
 }
-.parts-of-speech .definitions-list .definition::before {
+.result-wrapper .result-content-list .parts-of-speech .definitions-list .definition::before {
   content: "•";
-  color: #a444f3;
   position: absolute;
-  left: 3%;
+  left: 0;
+  color: #a444f3;
 }
-.parts-of-speech .synonyms {
+.result-wrapper .result-content-list .parts-of-speech .synonyms {
   display: flex;
-  padding-top: 2rem;
-  gap: 10px;
+  gap: 8px;
+  padding-top: 16px;
   font-size: clamp(1.3rem, 3vw, 1.5rem);
 }
-.parts-of-speech .synonyms .synonyms-tag {
+.result-wrapper .result-content-list .parts-of-speech .synonyms .synonym-tag {
   color: #9b9b9b;
 }
-.parts-of-speech .synonyms .synonyms-list {
+.result-wrapper .result-content-list .parts-of-speech .synonyms .synonyms-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   list-style: none;
   color: #a444f3;
   font-weight: bold;
+  cursor: pointer;
 }
-.parts-of-speech .usage {
-  color: #9b9b9b;
-  font-size: 14px;
-  padding-left: 1rem;
-  font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
-}
-
-footer {
+.result-wrapper .result-footer {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
   font-size: clamp(0.8rem, 1vw, 1rem);
-  padding-top: 1.5rem;
+  padding-top: 32px;
 }
-footer .source-tag {
+.result-wrapper .result-footer .source-tag {
   color: #9b9b9b;
 }
-footer .source {
+.result-wrapper .result-footer .source {
   color: #4a4a4a;
 }
-
-.search-message .message-heading {
-  padding-bottom: 20px;
+.result-wrapper .message {
   font-size: clamp(2.1875rem, 2.3295rem - 0.7102vw, 1.275rem);
+  padding-bottom: 20px;
 }
-.search-message .message-heading .query {
+.result-wrapper .message.centered {
+  text-align: center;
+}
+.result-wrapper .message .query {
   color: var(--icon-color);
 }
-
-.suggestions {
+.result-wrapper .suggestions-title {
   font-size: clamp(1.25rem, 1.3636rem - 0.5682vw, 1rem);
 }
-
-.suggestions-list {
-  padding: 20px;
+.result-wrapper .suggestions {
+  padding: 24px;
 }
-.suggestions-list .suggestion-item {
+.result-wrapper .suggestions .suggestion {
   padding-bottom: 8px;
 }
-.suggestions-list .suggestion-item::marker {
+.result-wrapper .suggestions .suggestion::marker {
   color: var(--icon-color);
-}
-
-.instruction {
-  display: block;
-  padding-top: 20px;
-  text-align: center;
-  font-size: clamp(1.5rem, 3vw, 2.1875rem);
 }
