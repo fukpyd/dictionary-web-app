@@ -1,8 +1,4 @@
-export function toggleTheme(rootElement, themes) {
-  rootElement.classList.toggle("dark");
-  let currentTheme = themes.DARK;
-  if (!rootElement.classList.contains("dark")) {
-    currentTheme = themes.LIGHT;
-  }
-  localStorage.setItem("theme", currentTheme);
-}
+export const changeFontStyle = function (event) {
+  [...document.getElementsByTagName('body')][0].style.fontFamily =
+    event.target.value;
+};
