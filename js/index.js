@@ -1,75 +1,94 @@
-import { THEMES } from "./constants.js";
-import { toggleTheme } from "./utils.js";
-import { getData } from "./api.js";
+import { THEMES, toggleTheme } from './themes.js';
+import { getData, API_URL } from './api.js';
 import {
   createResult,
   createResultHeader,
-  showNoResult,
+  createNoResultMessage,
   createFooter,
-  changeFontStyle,
-  showNoQuery,
-  clearResultWrapper,
-} from "./functions.js";
+  createNoQueryMessage,
+} from './functions.js';
 
-const themeButton = document.querySelector(".theme-input");
-const currentTheme = localStorage.getItem("theme");
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+import { changeFontStyle } from './utils.js';
+
+const currentTheme = localStorage.getItem('theme');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
 const root = document.documentElement;
-const themeInput = document.querySelector(".theme-input");
-const url = `https://api.dictionaryapi.dev/api/v2/entries/en`;
-const resultWrapper = document.querySelector(".result-wrapper");
-const select = document.querySelector(".font-select");
-const searchButton = document.querySelector(".search-button");
-const searchInput = document.querySelector(".search-input");
-const inputClass = "no-query-message";
+const themeButton = document.querySelector('.theme-input');
+const themeInput = document.querySelector('.theme-input');
+const resultWrapper = document.querySelector('.result-wrapper');
+const select = document.querySelector('.font-select');
+const searchButton = document.querySelector('.search-button');
+const searchInput = document.querySelector('.search-input');
 
-if (currentTheme === "DARK" || prefersDarkScheme.matches) {
-  document.documentElement.classList.toggle("dark");
+const errorOutlineClassName = 'red-outline';
+
+const elements = {
+  searchInput,
+  errorOutlineClassName,
+};
+
+if (currentTheme === 'DARK' || prefersDarkScheme.matches) {
+  root.classList.toggle('dark');
   themeInput.checked = true;
 }
 
-themeButton.addEventListener("click", () => toggleTheme(root, THEMES));
+themeButton.addEventListener('click', () => toggleTheme(root, THEMES));
 
-select.addEventListener("change", changeFontStyle);
+select.addEventListener('change', changeFontStyle);
 
-const handleSubmit = async function (event, url, query, element, elementClass) {
+const handleSubmit = async function (event, url, query, elements) {
   event.preventDefault();
-  resultWrapper.innerHTML = "";
+  resultWrapper.innerHTML = '';
 
-  if (element.classList.contains(elementClass)) {
-    element.classList.remove(elementClass);
+  const { searchInput, errorOutlineClassName } = elements || {};
+
+  if (searchInput.classList.contains(errorOutlineClassName)) {
+    searchInput.classList.remove(errorOutlineClassName);
   }
 
   if (!query) {
-    const noQueryMessage = showNoQuery(searchInput, inputClass, resultWrapper);
-    resultWrapper.insertAdjacentHTML("afterbegin", noQueryMessage);
+    const noQueryMessage = createNoQueryMessage(
+      searchInput,
+      errorOutlineClassName
+    );
+    resultWrapper.insertAdjacentHTML('afterbegin', noQueryMessage);
+
     return;
   }
 
   const data = await getData(url, query);
 
   if (!Array.isArray(data) && !data?.length) {
-    const noResultMessage = showNoResult(query);
-    resultWrapper.insertAdjacentHTML("afterbegin", noResultMessage);
+    const noResultMessage = createNoResultMessage(query);
+    resultWrapper.insertAdjacentHTML('afterbegin', noResultMessage);
     return;
   }
 
   const resultHeader = createResultHeader(data);
-  console.log(resultHeader);
   const result = createResult(data);
   const footer = createFooter(data);
-  resultWrapper.insertAdjacentElement("beforeend", resultHeader);
-  resultWrapper.insertAdjacentHTML("beforeend", result);
-  resultWrapper.insertAdjacentHTML("beforeend", footer);
+
+  resultWrapper.insertAdjacentElement('afterbegin', resultHeader);
+  resultWrapper.insertAdjacentHTML('beforeend', result);
+  resultWrapper.insertAdjacentHTML('beforeend', footer);
+
+  const synonymsLists = [...document.querySelectorAll('.synonyms-list')];
+  synonymsLists.map((synonymsList) =>
+    synonymsList.addEventListener('click', (e) => {
+      handleSubmit(e, url, e.target.textContent, elements);
+      searchInput.value = e.target.textContent;
+    })
+  );
 };
 
-searchButton.addEventListener("click", (event) =>
-  handleSubmit(event, url, searchInput.value, searchInput, inputClass)
-);
+searchButton.addEventListener('click', (event) => {
+  handleSubmit(event, API_URL, searchInput.value, elements);
+});
 
-searchButton.addEventListener("keyup", function (event) {
+searchButton.addEventListener('keyup', function (event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    handleSubmit(event, url, searchInput.value, searchInput, inputClass);
+    handleSubmit(event, API_URL, searchInput.value, elements);
   }
 });
