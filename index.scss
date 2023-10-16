@@ -1,8 +1,8 @@
-@import "partials/colors";
-@import "partials/variables";
-@import "partials/themes";
-@import "partials/mixins";
-@import "partials/breakpoints";
+@import 'partials/colors';
+@import 'partials/variables';
+@import 'partials/themes';
+@import 'partials/mixins';
+@import 'partials/breakpoints';
 
 :root.dark {
   @include theme-colors($theme-map-dark);
@@ -23,98 +23,92 @@
 body {
   display: flex;
   flex-direction: column;
-  font-family: $primary-font-family;
-  margin: 20px auto;
   align-items: center;
-  font-size: $base-font-size;
   min-height: 100vh;
-  width: 50vw;
-  min-width: 250px;
-  max-width: 1024px;
+  margin: 16px 0;
+  font-family: $primary-font-family;
+  font-size: $base-font-size;
   @include css-var-styles(background-color, $--primary-bg);
   @include css-var-styles(color, $--primary-font-color);
-
-  @include breakpoint(medium) {
-    width: 100%;
-  }
-}
-
-svg {
-  min-width: 1vw;
 }
 
 .app-wrapper {
-  width: 50vw;
-  min-width: 250px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 0 10px;
+  gap: 24px;
+  width: 50vw;
+  min-width: 250px;
+  max-width: 1024px;
+  padding: 0 8px;
 
-  @include breakpoint(medium) {
+  @include breakpoint(tablet) {
     width: 100%;
+    padding: 0 24px;
   }
 }
 
 .app-header {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+
   .logo {
     font-size: clamp(2rem, 3vw, 3rem);
   }
 
-  .app-form {
+  .header-controls {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 32px;
 
     .select-wrapper {
       display: flex;
       align-items: center;
       position: relative;
-      gap: 5px;
+      gap: 8px;
 
       .font-select {
         appearance: none;
-        background-color: transparent;
+        padding: 8px;
         border: none;
-        padding: 0.3em;
+        font-size: clamp(1rem, 2vw, 1.3rem);
         font-family: $primary-font-family;
+        background-color: transparent;
         color: $light-grey;
         cursor: pointer;
-        font-size: clamp(1rem, 2vw, 1.3rem);
       }
 
       .font-label {
         display: inline-block;
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
 
         .arrow-down {
           fill: $purple;
         }
       }
     }
+
     .theme-wrapper {
-      position: relative;
       display: flex;
-      gap: 5px;
+      gap: 8px;
+
       .theme-label {
         display: flex;
         align-items: center;
+
         .moon {
           @include css-var-styles(fill, $--icon-color);
-          width: 15px;
+          width: 24px;
         }
       }
 
       .theme-input {
+        position: relative;
         appearance: none;
+        width: 54px;
+        height: 32px;
+        border-radius: 24px;
         background-color: $grey;
-        width: 40px;
-        height: 20px;
-        border-radius: 20px;
         transition: 0.5s;
 
         &:checked {
@@ -123,17 +117,18 @@ svg {
 
         &:before {
           position: absolute;
-          content: "";
-          width: 17px;
-          height: 17px;
+          content: '';
+          width: 24px;
+          height: 24px;
           border-radius: 20px;
-          top: 9%;
-          left: 1%;
+          top: 10%;
+          left: 5%;
           background-color: $white;
           transition: 0.5s;
         }
         &:checked:before {
-          left: 22px;
+          left: 95%;
+          transform: translateX(-100%);
         }
       }
     }
@@ -145,17 +140,16 @@ svg {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 
   .search-input {
     width: 100%;
-    padding: 10px;
+    padding: 16px;
     border: none;
-    border-radius: 20px;
+    border-radius: 24px;
     font-size: clamp(1rem, 3vw, 1.5rem);
-    font-family: $primary-font-family;
+    font-family: inherit;
     @include css-var-styles(background-color, $--input-color);
-    font-weight: bold;
     @include css-var-styles(color, $--primary-font-color);
 
     &::placeholder {
@@ -163,7 +157,7 @@ svg {
       color: $light-grey;
     }
 
-    &.no-query-message {
+    &.red-outline {
       outline: 2px solid red;
     }
   }
@@ -171,184 +165,176 @@ svg {
   .search-label {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 8px;
     transform: translateY(-50%);
 
     .search-button {
-      background-color: transparent;
+      padding: 8px;
       border: none;
+      background-color: transparent;
       cursor: pointer;
-      padding: 5px;
 
       .lens {
-        min-width: 20px;
-        max-width: 40px;
+        width: 24px;
+        fill: #a444f3;
       }
     }
   }
 }
 
 .result-wrapper {
-  .lexico-entry {
+  .result-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .lexico-left-column {
+    .left-column {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+
+      .phrase {
+        font-size: clamp(2.5rem, 6vw, 3rem);
+        font-weight: bold;
+      }
+
+      .pronunciation {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        color: $purple;
+      }
     }
 
-    .lexico-phrase {
-      font-size: clamp(2.5rem, 6vw, 3rem);
-      font-weight: bold;
-    }
     .pronunciation-button {
+      background-color: $light-purple;
       padding: 1rem 1.275rem;
       border: none;
       border-radius: 50%;
-      background-color: $light-purple;
       cursor: pointer;
 
-      .speaker {
-        font-size: 1.7rem;
-        vertical-align: middle;
+      .speaker-icon {
+        font-size: 32px;
         @include css-var-styles(color, $--icon-color);
       }
     }
   }
-  .lexico-pronunciation {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    color: $purple;
-  }
-}
 
-.parts-of-speech {
-  padding-top: 2rem;
-
-  .part-of-speech-container {
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-    padding-bottom: 1rem;
-
-    .part-of-speech {
-      display: inline-block;
-      font-family: $primary-font-family;
-      font-weight: bold;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-    }
-
-    .purple-line-container {
-      padding-top: 7px;
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-    .purple-line {
-      width: 100%;
-      border: 1px solid $purple;
-    }
-  }
-
-  .meaning {
-    display: inline-block;
-    padding-bottom: 0.8rem;
-    color: $light-grey;
-    font-size: clamp(1.3rem, 3vw, 1.5rem);
-  }
-
-  .definitions-list {
+  .result-content-list {
     list-style: none;
-    color: $grey;
-    font-size: clamp(1.3rem, 3vw, 1.5rem);
-    list-style-position: outside;
 
-    .definition {
-      padding-bottom: 0.5rem;
-      padding-left: 2.1rem;
-      position: relative;
+    .parts-of-speech {
+      padding-top: 32px;
 
-      &::before {
-        content: "•";
-        color: $purple;
-        position: absolute;
-        left: 3%;
+      .type-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 8px;
+
+        .type {
+          display: inline-block;
+          font-family: $primary-font-family;
+          font-size: clamp(1.5rem, 4vw, 2rem);
+          font-weight: bold;
+        }
+
+        .purple-line {
+          width: 100%;
+          height: 1px;
+          transform: translateY(2px);
+          background-color: $purple;
+        }
+      }
+
+      .meaning {
+        display: inline-block;
+        padding-bottom: 8px;
+        font-size: clamp(1.3rem, 3vw, 1.5rem);
+        color: $light-grey;
+      }
+
+      .definitions-list {
+        list-style: none;
+        font-size: clamp(1.3rem, 3vw, 1.5rem);
+        color: $grey;
+
+        .definition {
+          position: relative;
+          padding-bottom: 8px;
+          padding-left: 16px;
+
+          &::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: $purple;
+          }
+        }
+      }
+
+      .synonyms {
+        display: flex;
+        gap: 8px;
+        padding-top: 16px;
+        font-size: clamp(1.3rem, 3vw, 1.5rem);
+
+        .synonym-tag {
+          color: $light-grey;
+        }
+
+        .synonyms-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          list-style: none;
+          color: $purple;
+          font-weight: bold;
+          cursor: pointer;
+        }
       }
     }
   }
 
-  .synonyms {
+  .result-footer {
     display: flex;
-    padding-top: 2rem;
-    gap: 10px;
-    font-size: clamp(1.3rem, 3vw, 1.5rem);
+    gap: 8px;
+    width: 100%;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    padding-top: 32px;
 
-    .synonyms-tag {
+    .source-tag {
       color: $light-grey;
     }
-    .synonyms-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      list-style: none;
-      color: $purple;
-      font-weight: bold;
+    .source {
+      color: $grey;
     }
   }
 
-  .usage {
-    color: $light-grey;
-    font-size: 14px;
-    padding-left: 1rem;
-    font-size: clamp(0.75rem, 0.6932rem + 0.2841vw, 0.875rem);
-  }
-}
-
-footer {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  font-size: clamp(0.8rem, 1vw, 1rem);
-  padding-top: 1.5rem;
-  .source-tag {
-    color: $light-grey;
-  }
-  .source {
-    color: $grey;
-  }
-}
-.search-message {
-  .message-heading {
-    padding-bottom: 20px;
+  .message {
     font-size: clamp(2.1875rem, 2.3295rem + -0.7102vw, 1.275rem);
+    padding-bottom: 20px;
+
+    &.centered {
+      text-align: center;
+    }
 
     .query {
       @include css-var-styles(color, $--icon-color);
     }
   }
-}
 
-.suggestions {
-  font-size: clamp(1.25rem, 1.3636rem + -0.5682vw, 1rem);
-}
+  .suggestions-title {
+    font-size: clamp(1.25rem, 1.3636rem + -0.5682vw, 1rem);
+  }
 
-.suggestions-list {
-  padding: 20px;
+  .suggestions {
+    padding: 24px;
 
-  .suggestion-item {
-    padding-bottom: 8px;
+    .suggestion {
+      padding-bottom: 8px;
 
-    &::marker {
-      @include css-var-styles(color, $--icon-color);
+      &::marker {
+        @include css-var-styles(color, $--icon-color);
+      }
     }
   }
-}
-
-.instruction {
-  display: block;
-  padding-top: 20px;
-  text-align: center;
-  font-size: clamp(1.5rem, 3vw, 2.1875rem);
 }
