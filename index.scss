@@ -1,8 +1,8 @@
-@import 'partials/colors';
-@import 'partials/variables';
-@import 'partials/themes';
-@import 'partials/mixins';
-@import 'partials/breakpoints';
+@import "partials/colors";
+@import "partials/variables";
+@import "partials/themes";
+@import "partials/mixins";
+@import "partials/breakpoints";
 
 :root.dark {
   @include theme-colors($theme-map-dark);
@@ -50,9 +50,11 @@ body {
 .app-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   .logo {
-    font-size: clamp(2rem, 3vw, 3rem);
+    width: 24px;
+    height: 24px;
   }
 
   .header-controls {
@@ -117,7 +119,7 @@ body {
 
         &:before {
           position: absolute;
-          content: '';
+          content: "";
           width: 24px;
           height: 24px;
           border-radius: 20px;
@@ -263,7 +265,7 @@ body {
           padding-left: 16px;
 
           &::before {
-            content: '•';
+            content: "•";
             position: absolute;
             left: 0;
             color: $purple;

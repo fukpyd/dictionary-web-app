@@ -54,9 +54,11 @@ body {
 .app-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .app-header .logo {
-  font-size: clamp(2rem, 3vw, 3rem);
+  width: 24px;
+  height: 24px;
 }
 .app-header .header-controls {
   display: flex;
